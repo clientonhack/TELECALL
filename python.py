@@ -1051,7 +1051,8 @@ class TelecallApp:
                 self.root.after(0, lambda: self.on_code_requested(client, sent_code))
                 
             except Exception as e:
-                self.root.after(0, lambda: self.log_to_console(f"❌ Ошибка: {str(e)}", "error"))
+                error_msg = str(e)
+                self.root.after(0, lambda msg=error_msg: self.log_to_console(f"❌ Ошибка: {msg}", "error"))
         
         asyncio.run(request())
     
@@ -1088,7 +1089,8 @@ class TelecallApp:
                 self.root.after(0, lambda: self.on_login_success(me))
                 
             except Exception as e:
-                self.root.after(0, lambda: self.log_to_console(f"❌ Ошибка входа: {str(e)}", "error"))
+                error_msg = str(e)
+                self.root.after(0, lambda msg=error_msg: self.log_to_console(f"❌ Ошибка входа: {msg}", "error"))
         
         asyncio.run(login())
     
@@ -1152,7 +1154,8 @@ class TelecallApp:
                     self.root.after(0, lambda: self.log_to_console("❌ Рассылка завершена с ошибками", "error"))
                     
             except Exception as e:
-                self.root.after(0, lambda: self.log_to_console(f"💥 Критическая ошибка: {str(e)}", "error"))
+                error_msg = str(e)
+                self.root.after(0, lambda msg=error_msg: self.log_to_console(f"💥 Критическая ошибка: {msg}", "error"))
             finally:
                 self.root.after(0, self.on_sending_finished)
         
